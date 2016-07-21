@@ -109,17 +109,17 @@ int main(void)
 		  SD_UART_Send(&huart1,mpu_not,(uint16_t)17);
 	  }
 	  HAL_Delay(500);
-	  //SD_MPU6050_ReadTemperature(&hi2c1,&mpu1);
-	  //float temper = mpu1.Temperature;
+	  SD_MPU6050_ReadTemperature(&hi2c1,&mpu1);
+	  float temper = mpu1.Temperature;
 	  SD_MPU6050_ReadGyroscope(&hi2c1,&mpu1);
 	  int16_t g_x = mpu1.Gyroscope_X;
 	  int16_t g_y = mpu1.Gyroscope_Y;
 	  int16_t g_z = mpu1.Gyroscope_Z;
   /* USER CODE BEGIN 3 */
 	  SD_MPU6050_ReadAccelerometer(&hi2c1,&mpu1);
-	 /* int16_t a_x = mpu1.Accelerometer_X;
+	  int16_t a_x = mpu1.Accelerometer_X;
 	  int16_t a_y = mpu1.Accelerometer_Y;
-	  int16_t a_z = mpu1.Accelerometer_Z;*/
+	  int16_t a_z = mpu1.Accelerometer_Z;
   }
   /* USER CODE END 3 */
 
