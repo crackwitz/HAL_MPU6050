@@ -76,11 +76,18 @@
 #define MPU6050_GYRO_SENS_2000		((float) 16.4)
 
 /* Acce sensitivities in g */
-#define MPU6050_ACCE_SENS_2			((float) 16384)
-#define MPU6050_ACCE_SENS_4			((float) 8192)
-#define MPU6050_ACCE_SENS_8			((float) 4096)
-#define MPU6050_ACCE_SENS_16		((float) 2048)
-
+// for regular parts
+#define MPU6050_ACCE_SENS_2      ((float) 16384)
+#define MPU6050_ACCE_SENS_4      ((float) 8192)
+#define MPU6050_ACCE_SENS_8      ((float) 4096)
+#define MPU6050_ACCE_SENS_16     ((float) 2048)
+// engineering samples have halved acceleration sensitivity, operate at FS_SEL=2 (8g)
+// https://forum.sparkfun.com/viewtopic.php?t=30624
+// http://www.invensense.com/developers/forum/viewtopic.php?f=3&t=132&hilit=half
+#define MPU6050_ACCE_SENS_2_ES   ((float) 8192)
+#define MPU6050_ACCE_SENS_4_ES   ((float) 4096)
+#define MPU6050_ACCE_SENS_8_ES   ((float) 2048)
+#define MPU6050_ACCE_SENS_16_ES  ((float) 1024)
 
 MPU6050_Result MPU6050_Init(I2C_HandleTypeDef *I2Cx, MPU6050 *dev,
 		MPU6050_Device DeviceNumber,
@@ -164,21 +171,15 @@ MPU6050_Result MPU6050_SetAccelerometer(MPU6050 *dev, MPU6050_Accelerometer Acce
 	/* Set sensitivities for multiplying gyro and accelerometer data */
 	switch (AccelerometerSensitivity)
 	{
-	case MPU6050_Accelerometer_2G:
-		dev->Acce_Mult = 1 / MPU6050_ACCE_SENS_2;
-		break;
-	case MPU6050_Accelerometer_4G:
-		dev->Acce_Mult = 1 / MPU6050_ACCE_SENS_4;
-		break;
-	case MPU6050_Accelerometer_8G:
-		dev->Acce_Mult = 1 / MPU6050_ACCE_SENS_8;
-		break;
-	case MPU6050_Accelerometer_16G:
-		dev->Acce_Mult = 1 / MPU6050_ACCE_SENS_16;
-		break;
-	default:
-		dev->Acce_Mult = 0;
-		break;
+		case MPU6050_Accelerometer_2G:     dev->Acce_Mult = 1.0f / MPU6050_ACCE_SENS_2; break;
+		case MPU6050_Accelerometer_4G:     dev->Acce_Mult = 1.0f / MPU6050_ACCE_SENS_4; break;
+		case MPU6050_Accelerometer_8G:     dev->Acce_Mult = 1.0f / MPU6050_ACCE_SENS_8; break;
+		case MPU6050_Accelerometer_16G:    dev->Acce_Mult = 1.0f / MPU6050_ACCE_SENS_16; break;
+		case MPU6050_Accelerometer_2G_ES:  dev->Acce_Mult = 1.0f / MPU6050_ACCE_SENS_2_ES; break;
+		case MPU6050_Accelerometer_4G_ES:  dev->Acce_Mult = 1.0f / MPU6050_ACCE_SENS_4_ES; break;
+		case MPU6050_Accelerometer_8G_ES:  dev->Acce_Mult = 1.0f / MPU6050_ACCE_SENS_8_ES; break;
+		case MPU6050_Accelerometer_16G_ES: dev->Acce_Mult = 1.0f / MPU6050_ACCE_SENS_16_ES; break;
+		default: dev->Acce_Mult = 0; break;
 	}
 
 	/* Return OK */

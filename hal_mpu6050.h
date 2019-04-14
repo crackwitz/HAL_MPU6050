@@ -85,10 +85,14 @@ typedef enum
  */
 typedef enum
 {
-	MPU6050_Accelerometer_2G = 0x00, /*!< Range is +- 2G */
-	MPU6050_Accelerometer_4G = 0x01, /*!< Range is +- 4G */
-	MPU6050_Accelerometer_8G = 0x02, /*!< Range is +- 8G */
-	MPU6050_Accelerometer_16G = 0x03 /*!< Range is +- 16G */
+	MPU6050_Accelerometer_2G     = 0, /*!< Range is +- 2G */
+	MPU6050_Accelerometer_4G     = 1, /*!< Range is +- 4G */
+	MPU6050_Accelerometer_8G     = 2, /*!< Range is +- 8G */
+	MPU6050_Accelerometer_16G    = 3, /*!< Range is +- 16G */
+	MPU6050_Accelerometer_2G_ES  = 4, /*!< Range is +- 2G, ENGINEERING SAMPLE */
+	MPU6050_Accelerometer_4G_ES  = 5, /*!< Range is +- 4G, ENGINEERING SAMPLE */
+	MPU6050_Accelerometer_8G_ES  = 6, /*!< Range is +- 8G, ENGINEERING SAMPLE */
+	MPU6050_Accelerometer_16G_ES = 7  /*!< Range is +- 16G, ENGINEERING SAMPLE */
 } MPU6050_Accelerometer;
 
 /**
