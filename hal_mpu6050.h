@@ -201,6 +201,7 @@ MPU6050_Result MPU6050_SetAccelerometer(MPU6050 *DataStruct,
  */
 MPU6050_Result MPU6050_SetDataRate(MPU6050 *DataStruct, uint8_t rate);
 
+MPU6050_Result MPU6050_SetDLPF(MPU6050 *dev, uint8_t cfg);
 /**
  * @brief  Enables interrupts
  * @param  *DataStruct: Pointer to @ref MPU6050_t structure indicating MPU6050 device

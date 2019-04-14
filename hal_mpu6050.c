@@ -151,6 +151,25 @@ MPU6050_Result MPU6050_SetDataRate(MPU6050 *dev, MPU6050_DataRate rate)
 	return MPU6050_Result_Ok;
 }
 
+MPU6050_Result MPU6050_SetDLPF(MPU6050 *dev, uint8_t cfg)
+{
+	uint8_t regvalue = 0;
+	if (HAL_I2C_Mem_Read(dev->phi2c, dev->Address, MPU6050_CONFIG, 1, &regvalue, 1, 1000) != HAL_OK)
+	{
+		return MPU6050_Result_Error;
+	}
+
+	regvalue &= ~0b111;
+	regvalue |= (cfg & 0b111);
+
+	if (HAL_I2C_Mem_Write(dev->phi2c, dev->Address, MPU6050_CONFIG, 1, &regvalue, 1, 1000) != HAL_OK)
+	{
+		return MPU6050_Result_Error;
+	}
+
+	return MPU6050_Result_Ok;
+}
+
 MPU6050_Result MPU6050_SetAccelerometer(MPU6050 *dev, MPU6050_Accelerometer AccelerometerSensitivity)
 {
 	uint8_t regvalue = 0;
